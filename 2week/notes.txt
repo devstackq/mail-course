@@ -1,0 +1,57 @@
+context - отмена выполенейи операции, по условияю, таймауту, либо убить горутину(async oper)
+
+paralel oper - with chan 2 gorutine
+buf chan - make(chan string,1 )-  возможност ьщаписи в канал хотя бы 1 значения, не блокируясь
+
+pool workers - case - work - queuee
+fork daemon, - use - pool workers
+
+//worker pool example
+
+	const numJobs = 5
+	jobs := make(chan int, numJobs)
+	results := make(chan int, numJobs)
+
+	for w := 1; w <= 3; w++ {
+		//scheduler - run 3 gorutine worker(); each workegr,/
+		//mainGo - loop: add jobsChan <- val, concurrent worker() complete func,
+		go worker(w, jobs, results)
+	}
+
+	for j := 1; j <= numJobs; j++ {
+		jobs <- j
+	}
+	close(jobs)
+
+	for a := 1; a <= numJobs; a++ {
+		log.Println(<-results, "mainGo read chan result")
+	}
+}
+
+func worker(id int, jobs <-chan int, results chan<- int) {
+	//shceduler manage gorotine, queuee -> like fifo
+	for j := range jobs { //range queue int value from chan- mainGo values chan[int] buff chan
+		fmt.Println("worker", id, "started  job", j)
+		time.Sleep(time.Second)
+		fmt.Println("worker", id, "finished job", j)
+		results <- j * 2
+	}
+}
+//waitgroup - блокировка в конткесте,  пока группа горутин не выполнится - wg.Add(count), wg.Done(), wg.Wait()
+
+//размер буфера канала - есть лимит на одновременное выполнение горутин
+// - EMРTY STRUCT - не занимает места в памяти
+
+//ограничение по ресурсам, rate limit
+
+
+//1 sequnce call, slow, - default
+//2 concurrent call gorotine - maingGo, gorotineX(), sync(chan, waitgroup, mutext) ? change context- switch 
+//between goM, goX - sync - 1 момент времение 1 задача, переключение между горутинами быстрая, выполнение аждой горутины в отдельном потоке- для быстроты
+
+//3 concurrency with  parallelism go call funcs - 1 > core - gomaxprocs(countthread), 
+быстрее выполняется - горутины делятся на другие ядра
+
+
+1 core - concurrent go, async called func, context changed with Funcs
+1 > core - concurrent paralleling call
