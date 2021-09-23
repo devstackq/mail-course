@@ -4,12 +4,37 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"sync"
+	"sync/atomic"
 	"time"
 )
 
 //context
 
 func main() {
+	var count int32
+	//race condition, all goroutine 1 time - try change value
+	// mu := &sync.Mutex{}
+	//trye use - mutext or atomic ?
+	wg := sync.WaitGroup{}
+	wg.Add(1000)
+
+	//atomic
+
+	for i := 0; i < 1000; i++ {
+		go func() {
+			// mu.Lock()
+			// count++
+			// mu.Unlock()
+			atomic.AddInt32(&count, 2)
+			wg.Done()
+
+		}()
+	}
+	wg.Wait()
+	// time.Sleep(1 * time.Second)
+	//time - for call
+	log.Println(count, "count")
 	//1 case:
 	// ctx, cancel := context.WithCancel(context.Background())
 

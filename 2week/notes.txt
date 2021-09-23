@@ -43,6 +43,17 @@ func worker(id int, jobs <-chan int, results chan<- int) {
 // - EMРTY STRUCT - не занимает места в памяти
 
 //ограничение по ресурсам, rate limit
+ch := make(chan struct{}, 2)//buff chan
+wg.add(2)
+// called 2 func, sequence - while chan free
+
+//race condition - 
+1 struct - read/write 2 goroutine
+
+//mutext - race condition - lock() read/write - many goroutine
+
+atomic
+быстрее мутекса, примитив мутекса, может увеличивать занчение, без race cond
 
 
 //1 sequnce call, slow, - default
@@ -55,3 +66,4 @@ func worker(id int, jobs <-chan int, results chan<- int) {
 
 1 core - concurrent go, async called func, context changed with Funcs
 1 > core - concurrent paralleling call
+
