@@ -1,0 +1,44 @@
+var о явление снаружи функции
+arr [] = edit - by poionter else us - slice
+int slice - can - change value, map[] - not change, use - make(map[type]type)
+
+функция паралельное выполнение функции
+легковесный тред
+
+memory - Ram, L3, L2, L1 -fast L1 - fastly
+Ram, L3, L2, L1 - Memory size
+Переключение контекста, - планировщик задач - Context switch
+t1, save state procces1, restore state proccess2 t2
+
+переключение процесса - дорого в обычных программах, -вытесняющая многозадачность
+
+cgi - bin
+
+worker pool - n proccess - > не убиваются после заверешения выполнения работы, а ждут в ожидании след запроса
+
+легче чем процесс
+multithread - 1 тред - доступ к процессу, меньше памяти, переключение context switch
+
+событий подход - не блокирующий ввод, вывод, паралельно другие процессы выполняются
+1 system thread  - multi gorotine call, 
+csp - 
+
+Выполняется парарлеьно на всех тредах - ,
+Gorutine - 
+
+buf channel, - ch := make(chan int, 3)//capacity
+ch <- "naveen" //write 1 value
+ch <- "paul"//write second value
+    fmt.Println("capacity is", cap(ch)) //3
+    fmt.Println("length is", len(ch)) //2
+    fmt.Println("read value", <-ch)//len 1
+    
+горутина нельзя возвращать данные, только юбзать каналы
+Goshed - передает работу другой горутине
+
+select - multiplexor
+
+sync - goroutines - channel
+
+Небуфир канал, если есть запись в канал, то нажно прочесть значение, - будет блокировка
+Буф - можно не читать с канал, а записывать пока он не переполнится
