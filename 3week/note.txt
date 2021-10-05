@@ -1,1 +1,10 @@
-//omitempty - if field empty - не надо писать значение при упаковке
+4-5 r: rrrtr
+1-2 x: vxfdfdsadklj
+3-10 f: dsfffawfadkljasdas
+3-11 f: ddvcsadkljasdasdas
+2-20 f: dsadkljasdasdasdas
+2-13 k: dsadkljasdasdasasd
+9-12 d: dddddddddddddddd
+
+pprof
+sync pool - преолацироование памяти
